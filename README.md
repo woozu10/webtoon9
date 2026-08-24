@@ -36,3 +36,22 @@ npm run build
 
 이 저장소는 v0.1 홈 화면 프로토타입입니다.
 백엔드, 로그인, 실제 웹툰 데이터, 추천 알고리즘은 아직 연결하지 않았습니다.
+
+## GitHub Pages 배포
+
+이 프로젝트는 `main` 브랜치에 push되면 GitHub Actions가 자동으로 빌드하고 GitHub Pages에 배포합니다.
+
+GitHub에서:
+
+1. `Settings`
+2. `Pages`
+3. `Build and deployment`
+4. `Source`를 **GitHub Actions**로 선택
+
+배포가 완료되면 사이트 주소는 보통 아래 형식입니다.
+
+```text
+https://<github-username>.github.io/webtoon9/
+```
+
+GitHub의 `Actions` 탭에서 `Deploy WEBTOON9 to GitHub Pages` 작업이 성공했는지 확인할 수 있습니다.

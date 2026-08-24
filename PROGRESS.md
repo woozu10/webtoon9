@@ -3,6 +3,8 @@
 ## 2026-08-24
 
 ### 완료
+- GitHub Pages 자동 배포 설정 (`.github/workflows/deploy.yml`)
+- Vite GitHub Pages base 경로 `/webtoon9/` 설정
 - repository 이름: `webtoon9`
 - 사용자 손그림 홈 와이어프레임 반영
 - 홈 콘텐츠 카테고리 확정
