@@ -98,7 +98,7 @@ export default function App() {
 
       <footer>
         <strong>WEBTOON9</strong>
-        <span>v0.1 prototype</span>
+        <span>v0.3 prototype</span>
       </footer>
     </div>
   )

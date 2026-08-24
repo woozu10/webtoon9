@@ -9,7 +9,7 @@ export type Webtoon = {
 }
 
 export const webtoons: Webtoon[] = [
-  { id: 1, title: '별빛 농구부', subtitle: '우리들의 첫 번째 시즌', category: '신작', weekday: '월', badge: 'NEW', rank: 1 },
+  { id: 1, title: '민수의 첫번째 기회', subtitle: '새로운 시작을 향한 첫걸음', category: '신작', weekday: '월', badge: 'NEW', rank: 1 },
   { id: 2, title: '9번 교실', subtitle: '아무도 모르는 비밀', category: '급상승', weekday: '화', badge: 'UP', rank: 2 },
   { id: 3, title: '오늘도 레벨업', subtitle: '게임보다 어려운 학교생활', category: '인기', weekday: '수', badge: 'HOT', rank: 3 },
   { id: 4, title: '방과 후 탐정단', subtitle: '사라진 운동화를 찾아라', category: '완결', weekday: '목', rank: 4 },
