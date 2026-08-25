@@ -55,3 +55,14 @@ https://<github-username>.github.io/webtoon9/
 ```
 
 GitHub의 `Actions` 탭에서 `Deploy WEBTOON9 to GitHub Pages` 작업이 성공했는지 확인할 수 있습니다.
+
+
+## v0.3 실제 웹툰 콘텐츠
+
+월요일 연재작에 **민수의 첫 번째 기회**를 연결했습니다.
+
+- 원본 저자: **Minseo Jeon**
+- 원본 12컷 이미지 사용
+- 홈 카드와 오늘의 추천에서 작품을 열 수 있음
+- 세로 스크롤 웹툰 뷰어 제공
+- 프랑스어 앱의 학습용 표현/퀴즈/쉐도잉/역할극은 포함하지 않음
