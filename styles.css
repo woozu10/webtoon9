@@ -501,7 +501,7 @@ footer {
   width: 100%;
   margin: 0;
   line-height: 0;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 4 / 5;
   overflow: hidden;
   background: #111;
 }
@@ -583,6 +583,6 @@ footer {
   }
 
   .comic-panel {
-    aspect-ratio: 3 / 4;
+    aspect-ratio: 4 / 5;
   }
 }
