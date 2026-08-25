@@ -8,12 +8,25 @@ import MinsuFirstChance from './pages/MinsuFirstChance'
 const mainTabs = ['신작', '인기 TOP 10', '요일별', '완결작', '급상승']
 const weekdays = ['월', '화', '수', '목', '금', '토', '일']
 const MINSU_ID = 'minsu-basketball-01'
+const VIEWED_STORAGE_KEY = 'webtoon9.viewedWebtoons'
+
+function loadViewedIds(): Array<string | number> {
+  try {
+    const raw = localStorage.getItem(VIEWED_STORAGE_KEY)
+    if (!raw) return []
+    const parsed = JSON.parse(raw)
+    return Array.isArray(parsed) ? parsed : []
+  } catch {
+    return []
+  }
+}
 
 export default function App() {
   const [query, setQuery] = useState('')
   const [activeTab, setActiveTab] = useState('신작')
   const [weekday, setWeekday] = useState('월')
   const [openedWebtoonId, setOpenedWebtoonId] = useState<string | number | null>(null)
+  const [viewedIds, setViewedIds] = useState<Array<string | number>>(() => loadViewedIds())
 
   const filtered = useMemo(() => {
     const normalized = query.trim().toLowerCase()
@@ -30,13 +43,29 @@ export default function App() {
 
   const weekdayItems = filtered.filter((item) => item.weekday === weekday)
   const top10 = filtered.filter((item) => item.rank && item.rank <= 10)
+  const viewedWebtoons = webtoons.filter((item) => viewedIds.includes(item.id))
+
+  const rememberViewed = (item: Webtoon) => {
+    setViewedIds((current) => {
+      const next = [item.id, ...current.filter((id) => id !== item.id)].slice(0, 8)
+      try {
+        localStorage.setItem(VIEWED_STORAGE_KEY, JSON.stringify(next))
+      } catch {
+        // localStorage unavailable: keep the in-memory list for this session.
+      }
+      return next
+    })
+  }
 
   const openWebtoon = (item: Webtoon) => {
     if (item.id === MINSU_ID) {
+      rememberViewed(item)
       setOpenedWebtoonId(item.id)
       window.scrollTo({ top: 0, behavior: 'smooth' })
     }
   }
+
+  const minsu = webtoons.find((item) => item.id === MINSU_ID)
 
   if (openedWebtoonId === MINSU_ID) {
     return <MinsuFirstChance onBack={() => setOpenedWebtoonId(null)} />
@@ -66,7 +95,9 @@ export default function App() {
           <p>우연한 장거리 슛에서 시작된 민수의 농구부 도전.</p>
           <button
             type="button"
-            onClick={() => setOpenedWebtoonId(MINSU_ID)}
+            onClick={() => {
+              if (minsu) openWebtoon(minsu)
+            }}
           >
             1화 보기
           </button>
@@ -97,6 +128,41 @@ export default function App() {
         <div className="weekday-title">{weekday}요일 연재</div>
       </section>
 
+      {viewedWebtoons.length > 0 ? (
+        <section className="viewed-mini-section" aria-label="내가 본 웹툰">
+          <div className="viewed-mini-head">
+            <h2>내가 본 웹툰</h2>
+            <span>이어보기</span>
+          </div>
+
+          <div className="viewed-mini-row">
+            {viewedWebtoons.map((item) => (
+              <button
+                type="button"
+                className="viewed-mini-card"
+                key={item.id}
+                onClick={() => openWebtoon(item)}
+              >
+                <div className="viewed-mini-thumb">
+                  {item.coverImage ? (
+                    <img
+                      src={`${import.meta.env.BASE_URL}${item.coverImage}`}
+                      alt=""
+                    />
+                  ) : (
+                    <span>9</span>
+                  )}
+                </div>
+                <div className="viewed-mini-copy">
+                  <strong>{item.title}</strong>
+                  <span>1화 · 이어보기</span>
+                </div>
+              </button>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
       <WebtoonSection title={`${weekday}요일 연재`} items={weekdayItems} onOpen={openWebtoon} />
       <WebtoonSection title="신작" items={byCategory('신작')} large onOpen={openWebtoon} />
       <WebtoonSection title="인기 TOP 10" items={top10} showRank onOpen={openWebtoon} />
@@ -125,7 +191,7 @@ export default function App() {
 
       <footer>
         <strong>WEBTOON9</strong>
-        <span>v0.3 · Minsu First Chance</span>
+        <span>v0.15</span>
       </footer>
     </div>
   )

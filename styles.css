@@ -586,3 +586,675 @@ footer {
     aspect-ratio: 4 / 5;
   }
 }
+
+
+/* v0.9 clean vertical reader */
+.clean-strip {
+  width: min(720px, 100%);
+  margin: 0 auto;
+  background: #ffffff;
+  gap: 0;
+}
+
+.long-strip-panel {
+  width: 100%;
+  margin: 0;
+  line-height: 0;
+  aspect-ratio: auto;
+  overflow: visible;
+  background: transparent;
+}
+
+.long-strip-panel img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: top center;
+  background: #fff;
+}
+
+/* Safety: never show external dialogue blocks */
+.panel-dialogue,
+.dialogue-line,
+.reader-dialogue,
+.comic-transcript,
+.comic-caption {
+  display: none !important;
+}
+
+
+/* v0.12 — centered panel size adjustment */
+.fullscreen-reader-page {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  background: #efefef;
+  color: #111;
+}
+
+.fullscreen-reader-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: rgba(239,239,239,.92);
+}
+
+.reader-progress {
+  color: #666;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.fullscreen-reader-header {
+  min-height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 1040px;
+  color: #111;
+}
+
+.fullscreen-reader-header .reader-day,
+.fullscreen-reader-header .reader-fr-title,
+.fullscreen-reader-header .reader-summary,
+.fullscreen-reader-header .reader-meta span {
+  color: #444;
+  border-color: rgba(0,0,0,.12);
+}
+
+.fullscreen-comic-reader {
+  width: 100%;
+  background: #efefef;
+  scroll-snap-type: none;
+}
+
+.fullscreen-comic-panel {
+  position: relative;
+  width: 100%;
+  min-height: auto;
+  margin: 0;
+  padding: 56px 0 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  scroll-snap-align: none;
+  scroll-snap-stop: normal;
+  background: #efefef;
+}
+
+.fullscreen-panel-stage {
+  width: min(650px, 72vw);
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  background: transparent;
+}
+
+.fullscreen-panel-stage img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+  object-position: center;
+  box-shadow: none;
+}
+
+.panel-number {
+  display: none;
+}
+
+.fullscreen-reader-end {
+  min-height: 40vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #111;
+}
+
+.fullscreen-reader-end p {
+  color: #666;
+}
+
+/* Never render study subtitles/transcripts under comic images. */
+.fullscreen-reader-page .panel-dialogue,
+.fullscreen-reader-page .dialogue-line,
+.fullscreen-reader-page .reader-dialogue,
+.fullscreen-reader-page .comic-transcript,
+.fullscreen-reader-page .comic-caption {
+  display: none !important;
+}
+
+@media (max-width: 680px) {
+  .fullscreen-reader-toolbar {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .fullscreen-reader-header {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .fullscreen-comic-panel {
+    padding: 24px 0 18px;
+  }
+
+  .fullscreen-panel-stage {
+    width: min(100%, 430px);
+  }
+
+  .fullscreen-panel-stage img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+
+
+/* v0.13 — episode entry card */
+.episode-entry-page {
+  min-height: 100vh;
+  background: #f5f7fb;
+  color: #111827;
+}
+
+.episode-entry-toolbar {
+  background: rgba(255,255,255,.94);
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.episode-entry-toolbar .reader-back {
+  background: #ffffff;
+  color: #111827;
+  border-color: #dbe2ea;
+}
+
+.episode-entry-header {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 44px 24px 28px;
+}
+
+.episode-entry-header h1 {
+  margin: 6px 0 8px;
+  font-size: clamp(34px, 6vw, 58px);
+  letter-spacing: -2px;
+  line-height: 1;
+}
+
+.episode-entry-header .reader-fr-title {
+  color: #617087;
+}
+
+.episode-entry-header .reader-summary {
+  max-width: 720px;
+  color: #526176;
+}
+
+.episode-entry-header .reader-meta span {
+  color: #45617f;
+  border-color: #d7e2ef;
+  background: #ffffff;
+}
+
+.episode-entry-section {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 8px 24px 80px;
+}
+
+.episode-entry-section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.episode-entry-section-head h2 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.episode-entry-section-head span {
+  color: #7b8797;
+  font-size: 13px;
+}
+
+.episode-entry-card {
+  width: min(460px, 100%);
+  display: grid;
+  grid-template-columns: 132px 1fr 28px;
+  align-items: center;
+  gap: 16px;
+  padding: 0;
+  overflow: hidden;
+  text-align: left;
+  border: 1px solid #dde5ef;
+  border-radius: 16px;
+  background: #ffffff;
+  color: #111827;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, .06);
+}
+
+.episode-entry-card:hover,
+.episode-entry-card:focus-visible {
+  border-color: #9fc2ef;
+  box-shadow: 0 10px 28px rgba(37, 99, 235, .12);
+}
+
+.episode-entry-card img {
+  width: 132px;
+  height: 96px;
+  display: block;
+  object-fit: cover;
+}
+
+.episode-entry-copy {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.episode-entry-copy strong {
+  font-size: 18px;
+}
+
+.episode-entry-copy span {
+  overflow: hidden;
+  color: #334155;
+  font-size: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.episode-entry-copy small {
+  color: #2563eb;
+  font-weight: 700;
+}
+
+.episode-entry-arrow {
+  padding-right: 14px;
+  color: #64748b;
+  font-size: 32px;
+  line-height: 1;
+}
+
+@media (max-width: 680px) {
+  .episode-entry-header {
+    padding: 28px 16px 20px;
+  }
+
+  .episode-entry-section {
+    padding: 6px 16px 56px;
+  }
+
+  .episode-entry-card {
+    grid-template-columns: 112px 1fr 24px;
+    gap: 12px;
+  }
+
+  .episode-entry-card img {
+    width: 112px;
+    height: 84px;
+  }
+}
+
+
+/* v0.14 — episode review + review list */
+.episode-review-area {
+  width: min(760px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 54px 0 80px;
+  color: #111827;
+}
+
+.episode-review-complete {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.episode-review-complete > span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 0 13px;
+  border-radius: 999px;
+  background: #2563eb;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.episode-review-complete h2 {
+  margin: 14px 0 6px;
+  font-size: clamp(25px, 4vw, 36px);
+  letter-spacing: -1px;
+}
+
+.episode-review-complete p {
+  margin: 0;
+  color: #6b7280;
+}
+
+.episode-review-form {
+  padding: 24px;
+  border: 1px solid #dbe5f1;
+  border-radius: 18px;
+  background: #fff;
+}
+
+.episode-star-rating {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  margin-bottom: 18px;
+}
+
+.episode-star-rating button {
+  width: 44px;
+  height: 44px;
+  border: 0;
+  background: transparent;
+  color: #cbd5e1;
+  font-size: 32px;
+  line-height: 1;
+}
+
+.episode-star-rating button.selected {
+  color: #f5b301;
+}
+
+.episode-review-form textarea {
+  display: block;
+  width: 100%;
+  min-height: 126px;
+  resize: vertical;
+  padding: 14px 16px;
+  border: 1px solid #d7e0ea;
+  border-radius: 12px;
+  outline: 0;
+  background: #f8fafc;
+  color: #111827;
+  font: inherit;
+  line-height: 1.55;
+}
+
+.episode-review-form textarea:focus {
+  border-color: #7aa7e8;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, .10);
+}
+
+.episode-review-form-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 12px;
+}
+
+.episode-review-form-footer > span {
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+.episode-review-submit {
+  min-height: 42px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 999px;
+  background: #2563eb;
+  color: #fff;
+  font-weight: 800;
+}
+
+.episode-review-submit:disabled {
+  cursor: not-allowed;
+  background: #cbd5e1;
+}
+
+.episode-review-saved {
+  margin: 12px 0 0;
+  color: #2563eb;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: right;
+}
+
+.episode-review-list-area {
+  margin-top: 24px;
+}
+
+.episode-review-toggle {
+  width: 100%;
+  min-height: 54px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 0 16px;
+  border: 1px solid #dbe5f1;
+  border-radius: 14px;
+  background: #fff;
+  color: #111827;
+  text-align: left;
+}
+
+.episode-review-toggle strong {
+  min-width: 28px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: #eaf2ff;
+  color: #2563eb;
+  font-size: 12px;
+  text-align: center;
+}
+
+.episode-review-toggle span:last-child {
+  margin-left: auto;
+  color: #64748b;
+}
+
+.episode-review-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.episode-review-empty,
+.episode-review-item {
+  padding: 18px;
+  border: 1px solid #e1e8f0;
+  border-radius: 14px;
+  background: #fff;
+}
+
+.episode-review-empty {
+  color: #7b8797;
+  text-align: center;
+}
+
+.episode-review-item-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.episode-review-stars {
+  color: #f5b301;
+  letter-spacing: 1px;
+  font-size: 14px;
+}
+
+.episode-review-stars span {
+  color: #d8dee7;
+}
+
+.episode-review-item time {
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+.episode-review-item p {
+  margin: 10px 0 0;
+  color: #334155;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.episode-review-back {
+  display: block;
+  margin: 30px auto 0;
+  min-height: 44px;
+  padding: 0 18px;
+  border: 1px solid #cdd9e6;
+  border-radius: 999px;
+  background: #fff;
+  color: #334155;
+  font-weight: 800;
+}
+
+@media (max-width: 680px) {
+  .episode-review-area {
+    width: min(100% - 24px, 760px);
+    padding-top: 36px;
+  }
+
+  .episode-review-form {
+    padding: 18px 14px;
+  }
+
+  .episode-star-rating button {
+    width: 42px;
+    height: 42px;
+    font-size: 29px;
+  }
+}
+
+
+/* v0.15 — 내가 본 웹툰: 요일 연재 바로 위 작은 카드 */
+.viewed-mini-section {
+  margin-top: 22px;
+  padding: 15px 16px 16px;
+  border: 1px solid #e1e8f0;
+  border-radius: 16px;
+  background: #f8fbff;
+}
+
+.viewed-mini-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 11px;
+}
+
+.viewed-mini-head h2 {
+  margin: 0;
+  color: #172033;
+  font-size: 16px;
+  letter-spacing: -.3px;
+}
+
+.viewed-mini-head > span {
+  color: #6f8096;
+  font-size: 12px;
+}
+
+.viewed-mini-row {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.viewed-mini-row::-webkit-scrollbar {
+  display: none;
+}
+
+.viewed-mini-card {
+  min-width: 230px;
+  max-width: 280px;
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr);
+  align-items: center;
+  gap: 11px;
+  padding: 7px 12px 7px 7px;
+  border: 1px solid #dce6f1;
+  border-radius: 12px;
+  background: #fff;
+  color: #172033;
+  text-align: left;
+}
+
+.viewed-mini-card:hover,
+.viewed-mini-card:focus-visible {
+  border-color: #9dc0ef;
+  background: #fafdff;
+}
+
+.viewed-mini-thumb {
+  width: 64px;
+  height: 64px;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+  background: #e9f2ff;
+  color: #2563eb;
+  font-size: 27px;
+  font-weight: 900;
+}
+
+.viewed-mini-thumb img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.viewed-mini-copy {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.viewed-mini-copy strong {
+  overflow: hidden;
+  font-size: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.viewed-mini-copy span {
+  color: #2563eb;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+@media (max-width: 680px) {
+  .viewed-mini-section {
+    margin-top: 16px;
+    padding: 13px 12px;
+  }
+
+  .viewed-mini-card {
+    min-width: 205px;
+    grid-template-columns: 56px minmax(0, 1fr);
+  }
+
+  .viewed-mini-thumb {
+    width: 56px;
+    height: 56px;
+  }
+}
