@@ -1,0 +1,27 @@
+WEBTOON9 v0.7 — 전체 프로젝트
+
+이 ZIP은 수정 파일만 들어 있는 패치가 아니라 전체 WEBTOON9 프로젝트입니다.
+
+압축을 풀면 최상위에 다음 항목들이 보입니다.
+- .github
+- docs
+- public
+- src
+- package.json
+- vite.config.ts
+- tsconfig.json
+- index.html
+- README.md
+- PROGRESS.md
+
+이번 변경
+1. `민수의 첫 번째 기회` 12컷을 세로 3:4 웹툰 프레임으로 표시
+2. 기존 가로 이미지는 새로 생성하지 않고 CSS로 세로 프레임에 맞춤
+3. 그림 아래 `Minsu / Hein ? Je suis en retard !` 같은 별도 대사 박스 제거
+4. 이미지 자체에 들어 있는 말풍선은 그대로 유지
+5. GitHub Pages 자동 배포 설정 포함
+
+GitHub 적용
+- 이 ZIP을 압축 해제합니다.
+- 압축 해제한 폴더 안의 전체 파일/폴더를 `webtoon9` repository 최상위에 업로드/덮어씁니다.
+- Commit changes 후 Actions 배포가 끝나면 사이트를 강력 새로고침합니다.
