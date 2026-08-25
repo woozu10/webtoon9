@@ -624,13 +624,13 @@ footer {
 }
 
 
-/* v0.11 — one screen, one comic panel */
+/* v0.12 — centered panel size adjustment */
 .fullscreen-reader-page {
   width: 100%;
   max-width: none;
   margin: 0;
-  background: #070b12;
-  color: #fff;
+  background: #efefef;
+  color: #111;
 }
 
 .fullscreen-reader-toolbar {
@@ -638,84 +638,88 @@ footer {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
+  background: rgba(239,239,239,.92);
 }
 
 .reader-progress {
-  color: rgba(255,255,255,.72);
+  color: #666;
   font-size: 13px;
   font-weight: 700;
 }
 
 .fullscreen-reader-header {
-  min-height: calc(100vh - 58px);
-  min-height: calc(100svh - 58px);
+  min-height: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   max-width: 1040px;
+  color: #111;
+}
+
+.fullscreen-reader-header .reader-day,
+.fullscreen-reader-header .reader-fr-title,
+.fullscreen-reader-header .reader-summary,
+.fullscreen-reader-header .reader-meta span {
+  color: #444;
+  border-color: rgba(0,0,0,.12);
 }
 
 .fullscreen-comic-reader {
   width: 100%;
-  background: #05070b;
-  scroll-snap-type: y mandatory;
+  background: #efefef;
+  scroll-snap-type: none;
 }
 
 .fullscreen-comic-panel {
   position: relative;
   width: 100%;
-  min-height: calc(100vh - 58px);
-  min-height: calc(100svh - 58px);
+  min-height: auto;
   margin: 0;
+  padding: 56px 0 44px;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-  background: #05070b;
+  overflow: visible;
+  scroll-snap-align: none;
+  scroll-snap-stop: normal;
+  background: #efefef;
 }
 
 .fullscreen-panel-stage {
-  width: 100%;
-  height: calc(100vh - 58px);
-  height: calc(100svh - 58px);
+  width: min(650px, 72vw);
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  background: #05070b;
+  overflow: visible;
+  background: transparent;
 }
 
 .fullscreen-panel-stage img {
   display: block;
-  width: auto;
-  height: 100%;
+  width: 100%;
+  height: auto;
   max-width: 100%;
   object-fit: contain;
   object-position: center;
+  box-shadow: none;
 }
 
 .panel-number {
-  position: absolute;
-  right: 18px;
-  bottom: 16px;
-  z-index: 2;
-  border-radius: 999px;
-  padding: 7px 11px;
-  background: rgba(0,0,0,.62);
-  color: rgba(255,255,255,.9);
-  font-size: 12px;
-  font-weight: 800;
-  line-height: 1;
+  display: none;
 }
 
 .fullscreen-reader-end {
-  min-height: 60vh;
+  min-height: 40vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  color: #111;
+}
+
+.fullscreen-reader-end p {
+  color: #666;
 }
 
 /* Never render study subtitles/transcripts under comic images. */
@@ -727,28 +731,28 @@ footer {
   display: none !important;
 }
 
-@media (orientation: landscape) {
-  .fullscreen-panel-stage img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+@media (max-width: 680px) {
+  .fullscreen-reader-toolbar {
+    padding-left: 12px;
+    padding-right: 12px;
   }
-}
 
-@media (max-width: 680px) and (orientation: portrait) {
   .fullscreen-reader-header {
-    padding-left: 18px;
-    padding-right: 18px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .fullscreen-comic-panel {
+    padding: 24px 0 18px;
   }
 
   .fullscreen-panel-stage {
-    width: 100%;
+    width: min(100%, 430px);
   }
 
   .fullscreen-panel-stage img {
     width: 100%;
     height: auto;
-    max-height: calc(100svh - 58px);
-    object-fit: contain;
   }
 }
+
