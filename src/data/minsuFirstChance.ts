@@ -15,6 +15,17 @@ export const minsuFirstChance = {
   genres: ['스포츠', '학교', '성장'],
   coverImage: 'webtoons/minsu-first-chance/scene-03.webp',
   panels: [
-    'webtoons/minsu-first-chance/minsu-first-chance-portrait-long.jpg',
+    'webtoons/minsu-first-chance/scene-01.webp',
+    'webtoons/minsu-first-chance/scene-02.webp',
+    'webtoons/minsu-first-chance/scene-03.webp',
+    'webtoons/minsu-first-chance/scene-04.webp',
+    'webtoons/minsu-first-chance/scene-05.webp',
+    'webtoons/minsu-first-chance/scene-06.webp',
+    'webtoons/minsu-first-chance/scene-07.webp',
+    'webtoons/minsu-first-chance/scene-08.webp',
+    'webtoons/minsu-first-chance/scene-09.webp',
+    'webtoons/minsu-first-chance/scene-10.webp',
+    'webtoons/minsu-first-chance/scene-11.webp',
+    'webtoons/minsu-first-chance/scene-12.webp',
   ],
 } as const

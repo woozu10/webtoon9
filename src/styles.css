@@ -622,3 +622,133 @@ footer {
 .comic-caption {
   display: none !important;
 }
+
+
+/* v0.11 — one screen, one comic panel */
+.fullscreen-reader-page {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  background: #070b12;
+  color: #fff;
+}
+
+.fullscreen-reader-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.reader-progress {
+  color: rgba(255,255,255,.72);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.fullscreen-reader-header {
+  min-height: calc(100vh - 58px);
+  min-height: calc(100svh - 58px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 1040px;
+}
+
+.fullscreen-comic-reader {
+  width: 100%;
+  background: #05070b;
+  scroll-snap-type: y mandatory;
+}
+
+.fullscreen-comic-panel {
+  position: relative;
+  width: 100%;
+  min-height: calc(100vh - 58px);
+  min-height: calc(100svh - 58px);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  background: #05070b;
+}
+
+.fullscreen-panel-stage {
+  width: 100%;
+  height: calc(100vh - 58px);
+  height: calc(100svh - 58px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #05070b;
+}
+
+.fullscreen-panel-stage img {
+  display: block;
+  width: auto;
+  height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+.panel-number {
+  position: absolute;
+  right: 18px;
+  bottom: 16px;
+  z-index: 2;
+  border-radius: 999px;
+  padding: 7px 11px;
+  background: rgba(0,0,0,.62);
+  color: rgba(255,255,255,.9);
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.fullscreen-reader-end {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Never render study subtitles/transcripts under comic images. */
+.fullscreen-reader-page .panel-dialogue,
+.fullscreen-reader-page .dialogue-line,
+.fullscreen-reader-page .reader-dialogue,
+.fullscreen-reader-page .comic-transcript,
+.fullscreen-reader-page .comic-caption {
+  display: none !important;
+}
+
+@media (orientation: landscape) {
+  .fullscreen-panel-stage img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+@media (max-width: 680px) and (orientation: portrait) {
+  .fullscreen-reader-header {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .fullscreen-panel-stage {
+    width: 100%;
+  }
+
+  .fullscreen-panel-stage img {
+    width: 100%;
+    height: auto;
+    max-height: calc(100svh - 58px);
+    object-fit: contain;
+  }
+}

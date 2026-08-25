@@ -1,0 +1,9 @@
+WEBTOON9 v0.11 변경분만 포함한 ZIP입니다.
+
+포함:
+- src/pages/MinsuFirstChance.tsx
+- src/data/minsuFirstChance.ts
+- src/styles.css
+- public/webtoons/minsu-first-chance/scene-01.webp ~ scene-12.webp
+
+GitHub repository 루트에서 동일한 경로에 그대로 덮어쓰면 됩니다.
