@@ -1,14 +1,72 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { minsuFirstChance } from '../data/minsuFirstChance'
 
 type Props = {
   onBack: () => void
 }
 
+type EpisodeReview = {
+  id: string
+  rating: number
+  text: string
+  createdAt: string
+}
+
 const assetUrl = (path: string) => `${import.meta.env.BASE_URL}${path}`
+const REVIEW_STORAGE_KEY = 'webtoon9.minsu-first-chance.episode-1.reviews'
+
+function loadReviews(): EpisodeReview[] {
+  try {
+    const raw = localStorage.getItem(REVIEW_STORAGE_KEY)
+    if (!raw) return []
+    const parsed = JSON.parse(raw)
+    return Array.isArray(parsed) ? parsed : []
+  } catch {
+    return []
+  }
+}
 
 export default function MinsuFirstChance({ onBack }: Props) {
   const [episodeOpen, setEpisodeOpen] = useState(false)
+  const [rating, setRating] = useState(0)
+  const [reviewText, setReviewText] = useState('')
+  const [reviews, setReviews] = useState<EpisodeReview[]>([])
+  const [showReviews, setShowReviews] = useState(true)
+  const [reviewSaved, setReviewSaved] = useState(false)
+
+  useEffect(() => {
+    setReviews(loadReviews())
+  }, [])
+
+  const saveReview = () => {
+    const text = reviewText.trim()
+    if (!rating || !text) return
+
+    const newReview: EpisodeReview = {
+      id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+      rating,
+      text,
+      createdAt: new Date().toISOString(),
+    }
+
+    const nextReviews = [newReview, ...reviews]
+    localStorage.setItem(REVIEW_STORAGE_KEY, JSON.stringify(nextReviews))
+    setReviews(nextReviews)
+    setRating(0)
+    setReviewText('')
+    setReviewSaved(true)
+    setShowReviews(true)
+  }
+
+  const formatReviewDate = (value: string) => {
+    const date = new Date(value)
+    if (Number.isNaN(date.getTime())) return ''
+    return date.toLocaleDateString('ko-KR', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    })
+  }
 
   if (!episodeOpen) {
     return (
@@ -53,7 +111,10 @@ export default function MinsuFirstChance({ onBack }: Props) {
             <div className="episode-entry-copy">
               <strong>1화</strong>
               <span>민수의 첫 번째 기회</span>
-              <small>눌러서 보기</small>
+              <small>
+                눌러서 보기
+                {reviews.length > 0 ? ` · 리뷰 ${reviews.length}` : ''}
+              </small>
             </div>
             <span className="episode-entry-arrow" aria-hidden="true">›</span>
           </button>
@@ -92,12 +153,106 @@ export default function MinsuFirstChance({ onBack }: Props) {
         ))}
       </section>
 
-      <div className="reader-end fullscreen-reader-end">
-        <strong>1화 끝</strong>
-        <button type="button" onClick={() => setEpisodeOpen(false)}>
+      <section className="episode-review-area">
+        <div className="episode-review-complete">
+          <span>1화 끝</span>
+          <h2>이번 화는 어떠셨나요?</h2>
+          <p>별점과 감상을 남겨주세요.</p>
+        </div>
+
+        <div className="episode-review-form">
+          <div className="episode-star-rating" aria-label="별점 선택">
+            {[1, 2, 3, 4, 5].map((star) => (
+              <button
+                type="button"
+                key={star}
+                className={star <= rating ? 'selected' : ''}
+                onClick={() => {
+                  setRating(star)
+                  setReviewSaved(false)
+                }}
+                aria-label={`${star}점`}
+              >
+                ★
+              </button>
+            ))}
+          </div>
+
+          <textarea
+            value={reviewText}
+            onChange={(event) => {
+              setReviewText(event.target.value)
+              setReviewSaved(false)
+            }}
+            placeholder="웹툰을 보고 느낀 점을 남겨주세요."
+            maxLength={500}
+          />
+
+          <div className="episode-review-form-footer">
+            <span>{reviewText.length}/500</span>
+            <button
+              type="button"
+              className="episode-review-submit"
+              disabled={!rating || !reviewText.trim()}
+              onClick={saveReview}
+            >
+              리뷰 등록
+            </button>
+          </div>
+
+          {reviewSaved ? (
+            <p className="episode-review-saved">리뷰가 등록되었습니다.</p>
+          ) : null}
+        </div>
+
+        <div className="episode-review-list-area">
+          <button
+            type="button"
+            className="episode-review-toggle"
+            onClick={() => setShowReviews((current) => !current)}
+          >
+            <span>리뷰 보기</span>
+            <strong>{reviews.length}</strong>
+            <span aria-hidden="true">{showReviews ? '⌃' : '⌄'}</span>
+          </button>
+
+          {showReviews ? (
+            <div className="episode-review-list">
+              {reviews.length === 0 ? (
+                <div className="episode-review-empty">
+                  아직 리뷰가 없습니다. 첫 리뷰를 남겨보세요.
+                </div>
+              ) : (
+                reviews.map((review) => (
+                  <article className="episode-review-item" key={review.id}>
+                    <div className="episode-review-item-head">
+                      <div className="episode-review-stars" aria-label={`${review.rating}점`}>
+                        {'★'.repeat(review.rating)}
+                        <span>{'★'.repeat(5 - review.rating)}</span>
+                      </div>
+                      <time dateTime={review.createdAt}>
+                        {formatReviewDate(review.createdAt)}
+                      </time>
+                    </div>
+                    <p>{review.text}</p>
+                  </article>
+                ))
+              )}
+            </div>
+          ) : null}
+        </div>
+
+        <button
+          type="button"
+          className="episode-review-back"
+          onClick={() => {
+            setEpisodeOpen(false)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }}
+        >
           회차 목록으로
         </button>
-      </div>
+      </section>
     </main>
   )
 }

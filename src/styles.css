@@ -906,3 +906,236 @@ footer {
     height: 84px;
   }
 }
+
+
+/* v0.14 — episode review + review list */
+.episode-review-area {
+  width: min(760px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 54px 0 80px;
+  color: #111827;
+}
+
+.episode-review-complete {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.episode-review-complete > span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 0 13px;
+  border-radius: 999px;
+  background: #2563eb;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.episode-review-complete h2 {
+  margin: 14px 0 6px;
+  font-size: clamp(25px, 4vw, 36px);
+  letter-spacing: -1px;
+}
+
+.episode-review-complete p {
+  margin: 0;
+  color: #6b7280;
+}
+
+.episode-review-form {
+  padding: 24px;
+  border: 1px solid #dbe5f1;
+  border-radius: 18px;
+  background: #fff;
+}
+
+.episode-star-rating {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  margin-bottom: 18px;
+}
+
+.episode-star-rating button {
+  width: 44px;
+  height: 44px;
+  border: 0;
+  background: transparent;
+  color: #cbd5e1;
+  font-size: 32px;
+  line-height: 1;
+}
+
+.episode-star-rating button.selected {
+  color: #f5b301;
+}
+
+.episode-review-form textarea {
+  display: block;
+  width: 100%;
+  min-height: 126px;
+  resize: vertical;
+  padding: 14px 16px;
+  border: 1px solid #d7e0ea;
+  border-radius: 12px;
+  outline: 0;
+  background: #f8fafc;
+  color: #111827;
+  font: inherit;
+  line-height: 1.55;
+}
+
+.episode-review-form textarea:focus {
+  border-color: #7aa7e8;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, .10);
+}
+
+.episode-review-form-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 12px;
+}
+
+.episode-review-form-footer > span {
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+.episode-review-submit {
+  min-height: 42px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 999px;
+  background: #2563eb;
+  color: #fff;
+  font-weight: 800;
+}
+
+.episode-review-submit:disabled {
+  cursor: not-allowed;
+  background: #cbd5e1;
+}
+
+.episode-review-saved {
+  margin: 12px 0 0;
+  color: #2563eb;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: right;
+}
+
+.episode-review-list-area {
+  margin-top: 24px;
+}
+
+.episode-review-toggle {
+  width: 100%;
+  min-height: 54px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 0 16px;
+  border: 1px solid #dbe5f1;
+  border-radius: 14px;
+  background: #fff;
+  color: #111827;
+  text-align: left;
+}
+
+.episode-review-toggle strong {
+  min-width: 28px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: #eaf2ff;
+  color: #2563eb;
+  font-size: 12px;
+  text-align: center;
+}
+
+.episode-review-toggle span:last-child {
+  margin-left: auto;
+  color: #64748b;
+}
+
+.episode-review-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.episode-review-empty,
+.episode-review-item {
+  padding: 18px;
+  border: 1px solid #e1e8f0;
+  border-radius: 14px;
+  background: #fff;
+}
+
+.episode-review-empty {
+  color: #7b8797;
+  text-align: center;
+}
+
+.episode-review-item-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.episode-review-stars {
+  color: #f5b301;
+  letter-spacing: 1px;
+  font-size: 14px;
+}
+
+.episode-review-stars span {
+  color: #d8dee7;
+}
+
+.episode-review-item time {
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+.episode-review-item p {
+  margin: 10px 0 0;
+  color: #334155;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.episode-review-back {
+  display: block;
+  margin: 30px auto 0;
+  min-height: 44px;
+  padding: 0 18px;
+  border: 1px solid #cdd9e6;
+  border-radius: 999px;
+  background: #fff;
+  color: #334155;
+  font-weight: 800;
+}
+
+@media (max-width: 680px) {
+  .episode-review-area {
+    width: min(100% - 24px, 760px);
+    padding-top: 36px;
+  }
+
+  .episode-review-form {
+    padding: 18px 14px;
+  }
+
+  .episode-star-rating button {
+    width: 42px;
+    height: 42px;
+    font-size: 29px;
+  }
+}
