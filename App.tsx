@@ -5,10 +5,13 @@ import type { Webtoon } from './data/mockWebtoons'
 import { webtoons } from './data/mockWebtoons'
 import MinsuFirstChance from './pages/MinsuFirstChance'
 
-const mainTabs = ['신작', '인기 TOP 10', '요일별', '완결작', '급상승']
+const mainTabs = ['신작', '인기 TOP 10', '요일별', '완결작', '급상승'] as const
 const weekdays = ['월', '화', '수', '목', '금', '토', '일']
 const MINSU_ID = 'minsu-basketball-01'
 const VIEWED_STORAGE_KEY = 'webtoon9.viewedWebtoons'
+
+type MainTab = (typeof mainTabs)[number]
+type Page = 'home' | MainTab
 
 function loadViewedIds(): Array<string | number> {
   try {
@@ -23,7 +26,7 @@ function loadViewedIds(): Array<string | number> {
 
 export default function App() {
   const [query, setQuery] = useState('')
-  const [activeTab, setActiveTab] = useState('신작')
+  const [page, setPage] = useState<Page>('home')
   const [weekday, setWeekday] = useState('월')
   const [openedWebtoonId, setOpenedWebtoonId] = useState<string | number | null>(null)
   const [viewedIds, setViewedIds] = useState<Array<string | number>>(() => loadViewedIds())
@@ -65,10 +68,110 @@ export default function App() {
     }
   }
 
+  const openPage = (tab: MainTab) => {
+    setPage(tab)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  const goHome = () => {
+    setPage('home')
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
   const minsu = webtoons.find((item) => item.id === MINSU_ID)
 
   if (openedWebtoonId === MINSU_ID) {
     return <MinsuFirstChance onBack={() => setOpenedWebtoonId(null)} />
+  }
+
+  const renderCategoryPage = () => {
+    if (page === 'home') return null
+
+    let title = page
+    let description = ''
+    let content = null
+
+    if (page === '신작') {
+      description = '새롭게 공개된 작품만 모아봤어요.'
+      content = <WebtoonSection title="신작 전체" items={byCategory('신작')} large onOpen={openWebtoon} />
+    }
+
+    if (page === '인기 TOP 10') {
+      description = '지금 가장 많이 보는 인기 작품이에요.'
+      content = <WebtoonSection title="인기 TOP 10" items={top10} showRank large onOpen={openWebtoon} />
+    }
+
+    if (page === '요일별') {
+      description = '요일을 선택해서 연재작을 찾아보세요.'
+      content = (
+        <>
+          <div className="category-weekday-tabs">
+            {weekdays.map((day) => (
+              <button
+                type="button"
+                key={day}
+                className={weekday === day ? 'active' : ''}
+                onClick={() => setWeekday(day)}
+              >
+                {day}
+              </button>
+            ))}
+          </div>
+          <WebtoonSection title={`${weekday}요일 연재`} items={weekdayItems} large onOpen={openWebtoon} />
+        </>
+      )
+    }
+
+    if (page === '완결작') {
+      description = '기다리지 않고 끝까지 볼 수 있는 완결 작품이에요.'
+      content = <WebtoonSection title="완결작 전체" items={byCategory('완결')} large onOpen={openWebtoon} />
+    }
+
+    if (page === '급상승') {
+      description = '최근 빠르게 관심이 높아진 작품이에요.'
+      content = <WebtoonSection title="급상승 전체" items={byCategory('급상승')} large onOpen={openWebtoon} />
+    }
+
+    return (
+      <main className="category-page">
+        <button type="button" className="category-back" onClick={goHome}>
+          ← 홈으로
+        </button>
+
+        <header className="category-page-header">
+          <span>WEBTOON9</span>
+          <h1>{title}</h1>
+          <p>{description}</p>
+        </header>
+
+        <div className="category-page-content">
+          {content}
+        </div>
+      </main>
+    )
+  }
+
+  if (page !== 'home') {
+    return (
+      <div className="app-shell category-shell">
+        <Header query={query} onQueryChange={setQuery} />
+
+        <nav className="main-tabs" aria-label="메인 메뉴">
+          {mainTabs.map((tab) => (
+            <button
+              type="button"
+              key={tab}
+              className={page === tab ? 'active' : ''}
+              onClick={() => openPage(tab)}
+            >
+              {tab}
+            </button>
+          ))}
+        </nav>
+
+        {renderCategoryPage()}
+      </div>
+    )
   }
 
   return (
@@ -80,8 +183,8 @@ export default function App() {
           <button
             type="button"
             key={tab}
-            className={activeTab === tab ? 'active' : ''}
-            onClick={() => setActiveTab(tab)}
+            className=""
+            onClick={() => openPage(tab)}
           >
             {tab}
           </button>
@@ -112,6 +215,9 @@ export default function App() {
       <section className="weekday-panel">
         <div className="section-head">
           <h2>요일별 웹툰</h2>
+          <button type="button" onClick={() => openPage('요일별')}>
+            전체보기
+          </button>
         </div>
         <div className="weekday-tabs">
           {weekdays.map((day) => (
@@ -164,34 +270,10 @@ export default function App() {
       ) : null}
 
       <WebtoonSection title={`${weekday}요일 연재`} items={weekdayItems} onOpen={openWebtoon} />
-      <WebtoonSection title="신작" items={byCategory('신작')} large onOpen={openWebtoon} />
-      <WebtoonSection title="인기 TOP 10" items={top10} showRank onOpen={openWebtoon} />
-      <WebtoonSection title="급상승" items={byCategory('급상승')} onOpen={openWebtoon} />
-      <WebtoonSection title="완결작" items={byCategory('완결')} onOpen={openWebtoon} />
-      <WebtoonSection title="짧게 보기" items={byCategory('짧게 보기')} onOpen={openWebtoon} />
-      <WebtoonSection title="애니메이션" items={byCategory('애니메이션')} onOpen={openWebtoon} />
-
-      <WebtoonSection
-        title="내 취향 추천"
-        items={[...filtered].sort((a, b) => (b.rank ?? 99) - (a.rank ?? 99)).slice(0, 6)}
-        onOpen={openWebtoon}
-      />
-
-      <WebtoonSection
-        title="찜"
-        items={filtered.filter((_, index) => index % 3 === 0).slice(0, 6)}
-        onOpen={openWebtoon}
-      />
-
-      <WebtoonSection
-        title="최근 본 작품"
-        items={filtered.slice(0, 6)}
-        onOpen={openWebtoon}
-      />
 
       <footer>
         <strong>WEBTOON9</strong>
-        <span>v0.15</span>
+        <span>v0.16</span>
       </footer>
     </div>
   )
