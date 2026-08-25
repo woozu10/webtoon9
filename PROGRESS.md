@@ -69,3 +69,11 @@
 - 웹툰 화면에서 장면 밖 별도 대사/자막 박스 제거
 - 장면 안의 말풍선만 유지
 - 전체 프로젝트 ZIP 형태로 재구성
+
+
+## 2026-08-25 — v0.10 Build Fix
+
+- GitHub Actions TypeScript 오류 수정
+- `Property 'env' does not exist on type 'ImportMeta'` 해결
+- `src/vite-env.d.ts`에 Vite 타입 참조 추가
+- Node.js 20 deprecated 메시지는 경고이며 빌드 실패 원인이 아님
