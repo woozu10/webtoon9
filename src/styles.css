@@ -756,3 +756,153 @@ footer {
   }
 }
 
+
+
+/* v0.13 — episode entry card */
+.episode-entry-page {
+  min-height: 100vh;
+  background: #f5f7fb;
+  color: #111827;
+}
+
+.episode-entry-toolbar {
+  background: rgba(255,255,255,.94);
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.episode-entry-toolbar .reader-back {
+  background: #ffffff;
+  color: #111827;
+  border-color: #dbe2ea;
+}
+
+.episode-entry-header {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 44px 24px 28px;
+}
+
+.episode-entry-header h1 {
+  margin: 6px 0 8px;
+  font-size: clamp(34px, 6vw, 58px);
+  letter-spacing: -2px;
+  line-height: 1;
+}
+
+.episode-entry-header .reader-fr-title {
+  color: #617087;
+}
+
+.episode-entry-header .reader-summary {
+  max-width: 720px;
+  color: #526176;
+}
+
+.episode-entry-header .reader-meta span {
+  color: #45617f;
+  border-color: #d7e2ef;
+  background: #ffffff;
+}
+
+.episode-entry-section {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 8px 24px 80px;
+}
+
+.episode-entry-section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.episode-entry-section-head h2 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.episode-entry-section-head span {
+  color: #7b8797;
+  font-size: 13px;
+}
+
+.episode-entry-card {
+  width: min(460px, 100%);
+  display: grid;
+  grid-template-columns: 132px 1fr 28px;
+  align-items: center;
+  gap: 16px;
+  padding: 0;
+  overflow: hidden;
+  text-align: left;
+  border: 1px solid #dde5ef;
+  border-radius: 16px;
+  background: #ffffff;
+  color: #111827;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, .06);
+}
+
+.episode-entry-card:hover,
+.episode-entry-card:focus-visible {
+  border-color: #9fc2ef;
+  box-shadow: 0 10px 28px rgba(37, 99, 235, .12);
+}
+
+.episode-entry-card img {
+  width: 132px;
+  height: 96px;
+  display: block;
+  object-fit: cover;
+}
+
+.episode-entry-copy {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.episode-entry-copy strong {
+  font-size: 18px;
+}
+
+.episode-entry-copy span {
+  overflow: hidden;
+  color: #334155;
+  font-size: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.episode-entry-copy small {
+  color: #2563eb;
+  font-weight: 700;
+}
+
+.episode-entry-arrow {
+  padding-right: 14px;
+  color: #64748b;
+  font-size: 32px;
+  line-height: 1;
+}
+
+@media (max-width: 680px) {
+  .episode-entry-header {
+    padding: 28px 16px 20px;
+  }
+
+  .episode-entry-section {
+    padding: 6px 16px 56px;
+  }
+
+  .episode-entry-card {
+    grid-template-columns: 112px 1fr 24px;
+    gap: 12px;
+  }
+
+  .episode-entry-card img {
+    width: 112px;
+    height: 84px;
+  }
+}
