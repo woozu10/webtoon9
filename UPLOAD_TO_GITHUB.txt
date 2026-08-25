@@ -1,30 +1,30 @@
-WEBTOON9 v0.8 FULL PROJECT
+WEBTOON9 v0.9 CLEAN FULL PROJECT
 
-이 ZIP은 패치가 아니라 전체 프로젝트입니다.
-
+이 ZIP은 전체 프로젝트입니다.
 압축을 풀면 바로 다음 항목이 보입니다:
 .github
-docs
-public
-src
-.env.example
-.gitignore
-ARCHITECTURE.md
-index.html
-package.json
-PROGRESS.md
-README.md
-REQUIREMENTS.md
-tsconfig.json
-vite.config.ts
+ docs
+ public
+ src
+ .env.example
+ .gitignore
+ ARCHITECTURE.md
+ index.html
+ package.json
+ PROGRESS.md
+ README.md
+ REQUIREMENTS.md
+ tsconfig.json
+ vite.config.ts
 
-변경:
-- 민수의 첫 번째 기회 12개 이미지를 세로 4:5 버전으로 교체
-- 기존 파일명(scene-01.webp ~ scene-12.webp)을 그대로 사용
-- 그림 아래 별도 자막/대사 박스 없음
-- 이미지 안의 원래 말풍선은 유지
-- GitHub Pages 설정 유지
+이번 변경:
+- 민수의 첫 번째 기회를 세로로 이어붙인 긴 웹툰 1장으로 정리
+- 장면 안 말풍선만 유지
+- 장면 아래 따로 나오던 대사/자막 박스 제거
+- 깨끗한 세로 리더로 표시
 
-GitHub 적용:
-이 ZIP을 압축 해제한 뒤, 안에 보이는 전체 파일/폴더를
-webtoon9 repository 최상위에 그대로 덮어 올리면 됩니다.
+적용 방법:
+1) ZIP 압축 해제
+2) 안에 있는 전체 파일/폴더를 GitHub webtoon9 repository 최상위에 덮어쓰기
+3) Commit changes
+4) GitHub Actions 완료 후 새로고침
